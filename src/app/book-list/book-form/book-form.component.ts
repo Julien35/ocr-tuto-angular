@@ -12,6 +12,9 @@ import {Router} from '@angular/router';
 export class BookFormComponent implements OnInit {
 
     bookForm: FormGroup;
+    fileIsUploading = false;
+    fileUrl: string;
+    fileUploaded = false;
 
     constructor(private formBuilder: FormBuilder, private booksService: BooksService,
                 private router: Router) {
@@ -19,6 +22,21 @@ export class BookFormComponent implements OnInit {
 
     ngOnInit() {
         this.initForm();
+    }
+
+    detectFiles(event) {
+        this.onUploadFile(event.target.files[0]);
+    }
+
+    onUploadFile(file: File) {
+        this.fileIsUploading = true;
+        this.booksService.uploadFile(file).then(
+            (url: string) => {
+                this.fileUrl = url;
+                this.fileIsUploading = false;
+                this.fileUploaded = true;
+            }
+        );
     }
 
     initForm() {
@@ -35,6 +53,9 @@ export class BookFormComponent implements OnInit {
         const synopsis = this.bookForm.get('synopsis').value;
         const newBook = new Book(title, author);
         newBook.synopsis = synopsis;
+        if (this.fileUrl && this.fileUrl !== '') {
+            newBook.photo = this.fileUrl;
+        }
         this.booksService.createNewBook(newBook);
         this.router.navigate(['/books']);
     }

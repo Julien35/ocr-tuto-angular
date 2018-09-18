@@ -15,6 +15,7 @@ import {BooksService} from './services/books.service';
 import {AuthGuardService} from './services/auth-guard.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import {HttpClientModule} from '@angular/common/http';
         ReactiveFormsModule,
         NgbModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,
+        FontAwesomeModule
     ],
     providers: [
         AuthService, BooksService, AuthGuardService

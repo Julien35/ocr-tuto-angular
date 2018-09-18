@@ -3,6 +3,7 @@ import {BooksService} from '../services/books.service';
 import {Book} from '../models/book';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
+import {faMinus} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-book-list',
@@ -11,6 +12,7 @@ import {Router} from '@angular/router';
 })
 export class BookListComponent implements OnInit, OnDestroy {
 
+    faMinus = faMinus;
     books: Book[];
     booksSubscription: Subscription;
 
